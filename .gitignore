@@ -4,6 +4,7 @@
 */build/
 */*/build/
 **/pubspec.lock
+/.idea
 
 package/inject/android/
 package/inject/ios/
