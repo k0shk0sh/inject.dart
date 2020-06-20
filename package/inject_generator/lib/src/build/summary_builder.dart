@@ -48,13 +48,16 @@ class InjectSummaryBuilder extends AbstractInjectBuilder {
             lib,
             'no @module, @injector or @provide annotated classes '
             'found in library');
+        // return an empty value to avoid creating summaries and inject files for classes that dont have any inject_dart annotation
+        return Future.value();
+      } else {
+        summary = new LibrarySummary(
+          SymbolPath.toAssetUri(lib.source.uri),
+          injectors: injectors,
+          modules: modules,
+          injectables: injectables,
+        );
       }
-      summary = new LibrarySummary(
-        SymbolPath.toAssetUri(lib.source.uri),
-        injectors: injectors,
-        modules: modules,
-        injectables: injectables,
-      );
     } else {
       var contents = await buildStep.readAsString(buildStep.inputId);
       if (contents.contains(new RegExp(r'part\s+of'))) {
