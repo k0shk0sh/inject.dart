@@ -11,7 +11,7 @@ import 'package:inject_generator/src/source/symbol_path.dart';
 
 /// Constructs a serializable path to [element].
 SymbolPath getSymbolPath(Element element) {
-  if (element is TypeDefiningElement && element.type.isDynamic) {
+  if (element.kind == ElementKind.DYNAMIC) {
     throw new ArgumentError('Dynamic element type not supported. This is a '
         'package:inject bug. Please report it.');
   }
